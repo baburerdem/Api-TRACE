@@ -25,22 +25,22 @@ Instructions:
 	- MoviePy
    
 2. Update the following variables with appropriate values:
-	- "video_name" : Name of the experiment video.
-	- "begin_min" and `begin_sec`: Time when the shock was applied in the experiment video.
-	- "exp_duration_min" and `exp_duration_sec`: Duration of the shock.
+	- `video_name` : Name of the experiment video.
+	- `begin_min` and `begin_sec`: Time when the shock was applied in the experiment video.
+	- `exp_duration_min` and `exp_duration_sec`: Duration of the shock.
 
 3. Run the script in a Python environment.
 
 4. Follow the instructions prompted in the console window to measure a bee, draw box areas, and define the shock area on the video frames.
 
-Files:
-	- {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
-	- {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
-	- {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
+Files: 
+- {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
+- {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
+- {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
 
-Notes:
-	- Ensure the experiment video is accessible and properly named.
-	- The script utilizes various image processing techniques and interactive functionalities to facilitate analysis and tracking of bee movements.
+Notes: 
+- Ensure the experiment video is accessible and properly named.
+- The script utilizes various image processing techniques and interactive functionalities to facilitate analysis and tracking of bee movements.
 
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
 
@@ -67,20 +67,20 @@ Instructions:
 	- writexl
 
 2. Update the following variables with appropriate values:
-	- "FileName" : Output file of the Shocked Bee Detector (Python code), named as {ExperimentVideoName_Shock.txt}_Shock.txt
-	- "Treatment", "Dose", "Unit", "Replicate" and "Phase" : Metadata of the experiment.
-	- "fps" : fps of the experiment video
-	- "SamplingRate" : Downsample the data. Data points in the plots are determined according to this variable.
+	- `FileName` : Output file of the Shocked Bee Detector (Python code), named as {ExperimentVideoName_Shock.txt}_Shock.txt
+	- `Treatment`, `Dose`, `Unit`, `Replicate` and `Phase` : Metadata of the experiment.
+	- `fps` : fps of the experiment video
+	- `SamplingRate` : Downsample the data. Data points in the plots are determined according to this variable.
 
 3. Run the R script.
 
-Files:
-	- {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
-	- {ExperimentVideoName}_data.xlsx : The output .xlsx file containing shock duration for each bee.
-	- {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
-	- {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
+Files: 
+- {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
+- {ExperimentVideoName}_data.xlsx : The output .xlsx file containing shock duration for each bee.
+- {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
+- {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
 Note: 
-	- Make sure to replace {FileName} with the actual name of your data file.
+- Make sure to replace {FileName} with the actual name of your data file.
 
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
