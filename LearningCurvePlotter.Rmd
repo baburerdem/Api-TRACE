@@ -1,0 +1,187 @@
+---
+title: "Learning Curve Plotter from Shocked Bee Detector Output"
+author: "Babur Erdem"
+date: "2023-07-26"
+update date: "2024-02-27"
+output: html_document
+---
+
+```{r}
+# Load necessary libraries.
+
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(ggpubr)
+library(writexl)
+```
+
+
+```{r}
+# Define metadata for the experiment.
+
+FileName = "SampleVideo_Shock.txt"   # Write the name of Shocked Bee Detector output (shock event data)
+Treatment = "LiCl"   # Name of the treatment used in the experiment
+Dose = 0   # Dose of the treatment
+Unit = "mM"   # Unit of the dose
+Replicate = 2   # Number of the replication of the experiment
+Phase = 1   # Code of the phase of the experiment (i.e. Acquisition: 1, Reversal: 2)
+fps= 30   #fps value of the experiment video
+SamplingRate = 60   #Downsampling rate (per sec)
+```
+
+
+```{r}
+# Read shock event data, converting boolean values to binary.
+
+ShockDf <- read.csv(FileName, sep = "\t", header = T)
+ShockDf[ShockDf == "True"] <- 1
+ShockDf[ShockDf == "False"] <- 0
+ShockDf <- data.frame(sapply(ShockDf, function(x) as.numeric(as.character(x))))
+```
+
+
+```{r}
+# Create a dataframe to store processed shock event data.
+
+columns = c("ExperimentName", "Treatment", "Dose", "Group", "Replicate", "Phase", "BeeID",
+            "Time", "ShockDuration") 
+
+ShockedDf = data.frame(matrix
+                       (nrow =(ceiling(nrow(ShockDf)/(fps*SamplingRate)))*(ncol(ShockDf)), 
+                        ncol = length(columns)))
+colnames(ShockedDf) <- columns
+```
+
+
+```{r}
+# Construct structured dataframe.
+# Populate the metadata columns in the dataframe.
+
+ShockedDf$ExperimentName <- rep(gsub('_Shock.txt','',FileName), nrow(ShockedDf))
+ShockedDf$Treatment <- rep(Treatment, nrow(ShockedDf))
+ShockedDf$Dose <- rep(Dose, nrow(ShockedDf))
+
+ShockedDf$Group <- rep(paste(Dose,Unit), nrow(ShockedDf))
+ShockedDf$Group <- gsub(" ", "", ShockedDf$Group)
+
+ShockedDf$Replicate <- rep(Replicate, nrow(ShockedDf))
+ShockedDf$Phase <- rep(Phase, nrow(ShockedDf))
+
+# Generate Bee IDs based on the structure of the data.
+
+BeeIDs <- c()
+Beenames <- c(names(ShockDf))
+for(i in Beenames){
+  names <- c(rep(i, (nrow(ShockedDf)/(ncol(ShockDf)))))
+  BeeIDs <- c(BeeIDs, names)
+}
+ShockedDf$BeeID <- BeeIDs
+
+ShockedDf$BeeID <- as.numeric(gsub('Bee','',ShockedDf$BeeID))
+ShockedDf$BeeID <- gsub(" ", "", (paste(sprintf("%03d", ShockedDf$Dose),Unit, "_Rep",
+                       ShockedDf$Replicate, "_Ind", sprintf("%02d", ShockedDf$BeeID))))
+
+```
+
+
+```{r}
+# Define time points for shock duration calculation.
+
+times <- c()
+j=0
+while (j <= ((ceiling((nrow(ShockDf))/(fps)))-1)) {
+  j=j+SamplingRate
+  if (j > (ceiling((nrow(ShockDf))/(fps)))){
+    j = (ceiling((nrow(ShockDf))/(fps)))
+  }
+  times = c(times,j)
+}
+
+ShockedDf$Time <- rep(times, ncol(ShockDf))
+```
+
+
+```{r}
+# Calculate shock duration for each time interval.
+
+shockDuration = c()
+for (ind in c(1:ncol(ShockDf))){
+  n=1
+  m=1
+  shockDur = c()
+  while (m <= nrow(ShockDf)){
+    m=n+(fps*SamplingRate)
+    x = sum(ShockDf[c(n:m), ind])
+    n=n+(fps*SamplingRate)
+    shockDur=c(shockDur,x)
+  }
+shockDuration = c(shockDuration, shockDur)  
+}
+ShockedDf$ShockDuration <- shockDuration/fps
+```
+
+```{r}
+# Remove rows with NA values.
+
+ShockedDf <- na.omit(ShockedDf)
+```
+
+
+```{r}
+# Write shock duration for each bee to an Excel file.
+
+write_xlsx(ShockedDf, paste((gsub('_Shock.txt','',FileName)),"_data.xlsx"))
+```
+
+
+```{r}
+# Generate and save a line plot, represents for each individual's learning curve.
+
+ggplot(data=ShockedDf, aes(x=Time, y=ShockDuration, col$BeeID)) + 
+ geom_line(alpha=0.5,lwd=1) + 
+ggtitle(paste("Learning profiles of", gsub('_Shock.txt','',FileName), sep=" "))+
+ theme(
+legend.background = element_rect(colour = NA),  
+legend.box = NULL,
+legend.key = element_rect(fill = "white", colour = "white"),
+legend.title = element_blank(),
+legend.text = element_text( size = 9),
+legend.position = "bottom",
+legend.direction ="horizontal",
+plot.title = element_text(size=13), 
+axis.title.x = element_text(size=11),
+axis.title.y = element_text(size=11),
+panel.grid.major = element_line(color = "lightgrey"),
+panel.grid.minor = element_line(color="lightgrey"),
+panel.background = element_rect(fill = "white")
+) +
+  ylim(0,(SamplingRate+5))+
+  xlab("Seconds") + 
+  ylab(paste("Shock Duration in ", SamplingRate, " sec", sep = ""))+
+  facet_wrap(~BeeID)
+
+ggsave(paste(gsub('_Shock.txt','',FileName),"_IndividualsProfiles.jpg"))
+```
+
+
+```{r}
+# Generate and save a line plot, represents group learning curve.
+
+ggline(ShockedDf, x="Time", y = "ShockDuration", color = "Dose",
+       add = c("mean_se"),size=1, ylab = (paste("Shock Duration in ", SamplingRate, " sec", 
+                                                sep = "")), xlab = "Second")+
+ggtitle(paste("Learning curve of", gsub('_Shock.txt','',FileName), sep=" "))+
+  theme(
+    legend.position = "none",  
+    plot.title = element_text(size=13), 
+    axis.title.x = element_text(size=11),
+    axis.title.y = element_text(size=11),
+    panel.grid.major = element_line(color = "white"),
+    panel.grid.minor = element_line(color="white"),
+    panel.background = element_rect(fill = "white"),
+  ) 
+
+ggsave(paste(gsub('_Shock.txt','',FileName),"_ShockPlot.jpg"))
+```
+
