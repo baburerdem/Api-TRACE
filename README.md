@@ -1,5 +1,7 @@
 A computer vision algorithm to analyze videos of electric shock avoidance assay on honey bees and a data processing code to visualize the results.
 
+First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance Assay) to create shock event data and a tracking video from the experiment video, then run the R code (Learning Curve Plotter from Bee Tracker Output) to visualize the shock event data and create an Excel file for further statistical analysis.
+
 ---
 Title: Shocked Bee Detector for Electric Shock Avoidance Assay
 Date: 07/30/2023
@@ -33,7 +35,7 @@ Instructions:
 
 Files:
 	- {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
-	- {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, which is the input of Learning Curve Plotter (R code).
+	- {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
 	- {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
 
 Notes:
@@ -65,7 +67,7 @@ Instructions:
 	- writexl
 
 2. Update the following variables with appropriate values:
-	- "FileName" : Output file of the Shocked Bee Detector (Python code), named as {ExperimentVideoName_Shock.txt}_Shock.txt.
+	- "FileName" : Output file of the Shocked Bee Detector (Python code), named as {ExperimentVideoName_Shock.txt}_Shock.txt
 	- "Treatment", "Dose", "Unit", "Replicate" and "Phase" : Metadata of the experiment.
 	- "fps" : fps of the experiment video
 	- "SamplingRate" : Downsample the data. Data points in the plots are determined according to this variable.
@@ -73,9 +75,9 @@ Instructions:
 3. Run the R script.
 
 Files:
-	- {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not..
+	- {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
 	- {ExperimentVideoName}_data.xlsx : The output .xlsx file containing shock duration for each bee.
-	- {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individuals.
+	- {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
 	- {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
 Note: 
