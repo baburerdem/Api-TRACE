@@ -1,4 +1,4 @@
-BoxNo	Replicate	Phase	Treatment	Dose
+BeeNo	Replicate	Phase	Treatment	Dose
 1	2	1	LiCl	0mM
 2	2	1	LiCl	0mM
 3	2	1	LiCl	0mM
