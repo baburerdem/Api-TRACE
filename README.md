@@ -11,9 +11,7 @@ Title: Shocked Bee Detector for Electric Shock Avoidance Assay
 Description:
 This Python script is designed to detect and analyze the response of bees to a shock stimulus from the experiment video. 
 The code performs several tasks, including:
-
-	
- 	- Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
+	- Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
   	- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the shock area.
    	- Tracking the movement of bees within defined boxes.
     	- Analyzing whether bees are shocked or not based on their tracked positions.
