@@ -18,23 +18,19 @@ library(writexl)
 
 
 ```{r}
-# Define metadata for the experiment.
+# Define variables for the experiment.
 
-FileName = "SampleVideo_Shock.txt"   # Write the name of Shocked Bee Detector output (shock event data)
-Treatment = "LiCl"   # Name of the treatment used in the experiment
-Dose = 0   # Dose of the treatment
-Unit = "mM"   # Unit of the dose
-Replicate = 2   # Number of the replication of the experiment
-Phase = 1   # Code of the phase of the experiment (i.e. Acquisition: 1, Reversal: 2)
-fps= 30   #fps value of the experiment video
-SamplingRate = 60   #Downsampling rate (per sec)
+VideoName = "SampleVideo"    # Write the name of Shocked Bee Detector output (shock event data)
+IndVars = c("Treatment", "Dose")   # Define independent variable to be graphed
+fps= 30    #fps value of the experiment video
+SamplingRate = 60    #Downsampling rate (per sec)
 ```
 
 
 ```{r}
 # Read shock event data, converting boolean values to binary.
 
-ShockDf <- read.csv(FileName, sep = "\t", header = T)
+ShockDf <- read.csv(gsub(" ", "", paste(VideoName, "_Shock.txt")), sep = "\t", header = T)
 ShockDf[ShockDf == "True"] <- 1
 ShockDf[ShockDf == "False"] <- 0
 ShockDf <- data.frame(sapply(ShockDf, function(x) as.numeric(as.character(x))))
@@ -42,9 +38,14 @@ ShockDf <- data.frame(sapply(ShockDf, function(x) as.numeric(as.character(x))))
 
 
 ```{r}
+MetaDf <- read.csv("SampleVideo_Metadata.txt", sep = "\t", header = T)
+```
+
+
+```{r}
 # Create a dataframe to store processed shock event data.
 
-columns = c("ExperimentName", "Treatment", "Dose", "Group", "Replicate", "Phase", "BeeID",
+columns = c("Video", colnames(MetaDf), "IndVar", "BeeID",
             "Time", "ShockDuration") 
 
 ShockedDf = data.frame(matrix
@@ -58,30 +59,35 @@ colnames(ShockedDf) <- columns
 # Construct structured dataframe.
 # Populate the metadata columns in the dataframe.
 
-ShockedDf$ExperimentName <- rep(gsub('_Shock.txt','',FileName), nrow(ShockedDf))
-ShockedDf$Treatment <- rep(Treatment, nrow(ShockedDf))
-ShockedDf$Dose <- rep(Dose, nrow(ShockedDf))
+ShockedDf$Video <- rep(VideoName, nrow(ShockedDf))
 
-ShockedDf$Group <- rep(paste(Dose,Unit), nrow(ShockedDf))
-ShockedDf$Group <- gsub(" ", "", ShockedDf$Group)
+for (colnom in colnames(MetaDf)) {
+  
+   IV <- as.numeric(which(colnames(ShockedDf)==colnom))
+   InV <- as.numeric(which(colnames(MetaDf)==colnom))
+   shocker <- c()
 
-ShockedDf$Replicate <- rep(Replicate, nrow(ShockedDf))
-ShockedDf$Phase <- rep(Phase, nrow(ShockedDf))
+   for(vars in MetaDf[,InV]){
+   shocker <- append(shocker, rep(vars, (nrow(ShockedDf)/nrow(MetaDf))), after = length(shocker))
+   }
+   ShockedDf[, IV] <- shocker
+}
 
+mergeInVars <- c()  
+for (inVar in IndVars) {
+  indepVar <- c()
+  inVarColNo <- as.numeric(which(colnames(ShockedDf)==inVar ))
+  indepVar <- ShockedDf[, inVarColNo]
+  mergeInVars <- paste(mergeInVars, indepVar, sep = "_")
+} 
+ShockedDf$IndVar <- gsub("^.", "",mergeInVars)
+```
+
+
+```{r}
 # Generate Bee IDs based on the structure of the data.
 
-BeeIDs <- c()
-Beenames <- c(names(ShockDf))
-for(i in Beenames){
-  names <- c(rep(i, (nrow(ShockedDf)/(ncol(ShockDf)))))
-  BeeIDs <- c(BeeIDs, names)
-}
-ShockedDf$BeeID <- BeeIDs
-
-ShockedDf$BeeID <- as.numeric(gsub('Bee','',ShockedDf$BeeID))
-ShockedDf$BeeID <- gsub(" ", "", (paste(sprintf("%03d", ShockedDf$Dose),Unit, "_Rep",
-                       ShockedDf$Replicate, "_Ind", sprintf("%02d", ShockedDf$BeeID))))
-
+ShockedDf$BeeID <- gsub(" ", "", (paste( VideoName, "_", "Bee", sprintf("%02d",ShockedDf$BoxNo))))
 ```
 
 
@@ -121,6 +127,7 @@ shockDuration = c(shockDuration, shockDur)
 ShockedDf$ShockDuration <- shockDuration/fps
 ```
 
+
 ```{r}
 # Remove rows with NA values.
 
@@ -131,7 +138,7 @@ ShockedDf <- na.omit(ShockedDf)
 ```{r}
 # Write shock duration for each bee to an Excel file.
 
-write_xlsx(ShockedDf, paste((gsub('_Shock.txt','',FileName)),"_data.xlsx"))
+write_xlsx(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.xlsx", sep = ""))
 ```
 
 
@@ -140,7 +147,7 @@ write_xlsx(ShockedDf, paste((gsub('_Shock.txt','',FileName)),"_data.xlsx"))
 
 ggplot(data=ShockedDf, aes(x=Time, y=ShockDuration, col$BeeID)) + 
  geom_line(alpha=0.5,lwd=1) + 
-ggtitle(paste("Learning profiles of", gsub('_Shock.txt','',FileName), sep=" "))+
+ggtitle(paste("Learning profiles of", gsub('_Shock.txt','',VideoName), sep=" "))+
  theme(
 legend.background = element_rect(colour = NA),  
 legend.box = NULL,
@@ -161,19 +168,19 @@ panel.background = element_rect(fill = "white")
   ylab(paste("Shock Duration in ", SamplingRate, " sec", sep = ""))+
   facet_wrap(~BeeID)
 
-ggsave(paste(gsub('_Shock.txt','',FileName),"_IndividualsProfiles.jpg"))
+ggsave(paste(gsub("_Shock.txt", "" ,VideoName), "_IndividualsProfiles.jpg", sep = ""))
 ```
 
 
 ```{r}
 # Generate and save a line plot, represents group learning curve.
 
-ggline(ShockedDf, x="Time", y = "ShockDuration", color = "Dose",
+ggline(ShockedDf, x="Time", y = "ShockDuration", color = "IndVar",
        add = c("mean_se"),size=1, ylab = (paste("Shock Duration in ", SamplingRate, " sec", 
                                                 sep = "")), xlab = "Second")+
-ggtitle(paste("Learning curve of", gsub('_Shock.txt','',FileName), sep=" "))+
+ggtitle(paste("Learning curves of", VideoName, sep=" "))+
   theme(
-    legend.position = "none",  
+    legend.position = "bottom",  
     plot.title = element_text(size=13), 
     axis.title.x = element_text(size=11),
     axis.title.y = element_text(size=11),
@@ -182,6 +189,6 @@ ggtitle(paste("Learning curve of", gsub('_Shock.txt','',FileName), sep=" "))+
     panel.background = element_rect(fill = "white"),
   ) 
 
-ggsave(paste(gsub('_Shock.txt','',FileName),"_ShockPlot.jpg"))
+ggsave(paste(gsub("_Shock.txt", "" ,VideoName), "_ShockPlot.jpg", sep = ""))
 ```
 
