@@ -59,24 +59,25 @@ The code performs several tasks, including:
 	- Drawing two plots: individuals' and group learning curves.
 
 Instructions:
-1. Ensure that the necessary R libraries are installed:
+1. Prepare a metadata file in .txt format. The first column should be `BeeNo`. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName_}_Metadata.txt
+
+2. Ensure that the necessary R libraries are installed:
 	- readxl
 	- ggplot2
 	- dplyr
 	- ggpubr
 	- writexl
 
-2. Update the following variables with appropriate values:
-	- `FileName` : Output file of the Shocked Bee Detector (Python code), named as {ExperimentVideoName_Shock.txt}_Shock.txt
-	- `Treatment`, `Dose`, `Unit`, `Replicate` and `Phase` : Metadata of the experiment.
-	- `fps` : fps of the experiment video
+3. Update the following variables with appropriate values:
+	- `VideoName` : Name of the experiment video.
+	- `fps` : fps of the experiment video.
 	- `SamplingRate` : Downsample the data. Data points in the plots are determined according to this variable.
 
-3. Run the R script.
+4. Run the R script.
 
 Files: 
 - {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
-- {ExperimentVideoName}_data.xlsx : The output .xlsx file containing shock duration for each bee.
+- {ExperimentVideoName}_Data.xlsx : The output .xlsx file containing shock duration for each bee.
 - {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
 - {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
