@@ -37,6 +37,7 @@ Files:
 - {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
 - {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
 - {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
+- {ExperimentVideoName}_BeeNo.jpg : Output .jpg image is showing the numbers assigned to bee individuals.
 
 Notes: 
 - Ensure the experiment video is accessible and properly named.
