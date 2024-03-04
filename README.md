@@ -60,7 +60,7 @@ The code performs several tasks, including:
 	- Drawing two plots: individuals' and group learning curves.
 
 Instructions:
-1. Prepare a metadata file in .txt format. The first column should be `BeeNo`. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName}_Metadata.txt
+1. Prepare a metadata file in .txt format. The first column should be `BeeNo`. Numbers should be given according to {ExperimentVideoName}_BeeNo.jpg image. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName}_Metadata.txt
 
 2. Ensure that the necessary R libraries are installed:
 	- readxl
