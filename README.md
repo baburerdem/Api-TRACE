@@ -11,11 +11,13 @@ Title: Shocked Bee Detector for Electric Shock Avoidance Assay
 Description:
 This Python script is designed to detect and analyze the response of bees to a shock stimulus from the experiment video. 
 The code performs several tasks, including:
-	- Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
-	- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the shock area.
-	- Tracking the movement of bees within defined boxes.
-	- Analyzing whether bees are shocked or not based on their tracked positions.
-	- Generating output files, including shock event data file and track video.
+
+	
+ 	- Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
+  	- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the shock area.
+   	- Tracking the movement of bees within defined boxes.
+    	- Analyzing whether bees are shocked or not based on their tracked positions.
+     	- Generating output files, including shock event data file and track video.
 
 Instructions:
 1. Ensure that the necessary Python libraries are installed:
@@ -55,9 +57,9 @@ Description:
 This R script is designed to analyze shock event data and visualization. 
 The code performs several tasks, including:
 	- Data preprocessing, converting shock event data, came from Shocked Bee Detector (Python code), to binary data.
-	- Creating a structured data frame.
-	- Generating an Excel file for further statistical analysis.
-	- Drawing two plots: individuals' and group learning curves.
+ 	- Creating a structured data frame.
+  	- Generating an Excel file for further statistical analysis.
+   	- Drawing two plots: individuals' and group learning curves.
 
 Instructions:
 1. Prepare a metadata file in .txt format. The first column should be `BeeNo`. Numbers should be given according to {ExperimentVideoName}_BeeNo.jpg image. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName}_Metadata.txt
