@@ -147,7 +147,7 @@ while True:
         cv2.destroyAllWindows()
         sys.exit()
 
-cv2.imwrite(str((video_name.replace(".mp4", "")) + "_BeeIDs.jpg"), frame)
+cv2.imwrite(str((video_name.replace(".mp4", "")) + "_BeeNo.jpg"), frame)
 
 video.release()
 cv2.destroyAllWindows()
