@@ -87,7 +87,7 @@ ShockedDf$IndVar <- gsub("^.", "",mergeInVars)
 ```{r}
 # Generate Bee IDs based on the structure of the data.
 
-ShockedDf$BeeID <- gsub(" ", "", (paste( VideoName, "_", "Bee", sprintf("%02d",ShockedDf$BoxNo))))
+ShockedDf$BeeID <- gsub(" ", "", (paste( VideoName, "_", "Bee", sprintf("%02d",ShockedDf$BeeNo))))
 ```
 
 
