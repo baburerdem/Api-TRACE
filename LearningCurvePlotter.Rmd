@@ -9,7 +9,6 @@ output: html_document
 ```{r}
 # Load necessary libraries.
 
-library(readxl)
 library(ggplot2)
 library(dplyr)
 library(ggpubr)
