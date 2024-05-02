@@ -2,7 +2,7 @@
 title: "Learning Curve Plotter from Shocked Bee Detector Output"
 author: "Babur Erdem"
 date: "2023-07-26"
-update date: "2024-02-27"
+update date: "2024-05-02"
 output: html_document
 ---
 
@@ -12,7 +12,6 @@ output: html_document
 library(ggplot2)
 library(dplyr)
 library(ggpubr)
-library(writexl)
 ```
 
 
@@ -135,9 +134,9 @@ ShockedDf <- na.omit(ShockedDf)
 
 
 ```{r}
-# Write shock duration for each bee to an Excel file.
+# Write shock duration for each bee to a tab delimited .txt file.
 
-write_xlsx(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.xlsx", sep = ""))
+write.table(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.txt"), sep = "\t", quote=FALSE)
 ```
 
 
