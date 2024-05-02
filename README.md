@@ -1,6 +1,6 @@
 A computer vision algorithm to analyze videos of electric shock avoidance assay on honey bees and a data processing code to visualize the results.
 
-First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance Assay) to create shock event data and a tracking video from the experiment video, then run the R code (Learning Curve Plotter from Bee Tracker Output) to visualize the shock event data and create an Excel file for further statistical analysis.
+First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance Assay) to create shock event data and a tracking video from the experiment video, then run the R code (Learning Curve Plotter from Bee Tracker Output) to visualize the shock event data and create a tab delimited .txt file for further statistical analysis.
 
 ---
 Title: Shocked Bee Detector for Electric Shock Avoidance Assay 
@@ -79,7 +79,7 @@ Instructions:
 
 Files: 
 - {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
-- {ExperimentVideoName}_Data.xlsx : The output .xlsx file containing shock duration for each bee.
+- {ExperimentVideoName}_Data.txt : The output .txt file containing shock duration for each bee.
 - {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
 - {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
