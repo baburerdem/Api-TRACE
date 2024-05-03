@@ -136,7 +136,7 @@ ShockedDf <- na.omit(ShockedDf)
 ```{r}
 # Write shock duration for each bee to a tab delimited .txt file.
 
-write.table(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.txt"), sep = "\t", quote=FALSE)
+write.table(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.txt", sep = ""), sep = "\t", quote=FALSE)
 ```
 
 
