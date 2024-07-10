@@ -2,7 +2,7 @@
 title: "Learning Curve Plotter from Shocked Bee Detector Output"
 author: "Babur Erdem"
 date: "2023-07-26"
-update date: "2024-05-02"
+update date: "2024-07-11"
 output: html_document
 ---
 
@@ -36,7 +36,9 @@ ShockDf <- data.frame(sapply(ShockDf, function(x) as.numeric(as.character(x))))
 
 
 ```{r}
-MetaDf <- read.csv("SampleVideo_Metadata.txt", sep = "\t", header = T)
+#Read metadata
+
+MetaDf <- read.csv(gsub(" ", "", paste(VideoName, "_Metadata.txt")), sep = "\t", header = T)
 ```
 
 
@@ -134,7 +136,7 @@ ShockedDf <- na.omit(ShockedDf)
 
 
 ```{r}
-# Write shock duration for each bee to an Excel file.
+# Write shock duration for each bee to a txt file.
 
 write.table(ShockedDf, paste((gsub("_Shock.txt", "" ,VideoName)), "_Data.txt", sep = ""), sep = "\t", quote=FALSE)
 ```
