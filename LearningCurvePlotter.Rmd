@@ -25,6 +25,7 @@ SamplingRate = 60    #Downsampling rate (per sec)
 
 
 ```{r}
+# Following parts are used for analysis; do not change anything below.
 # Read shock event data, converting boolean values to binary.
 
 ShockDf <- read.csv(gsub(" ", "", paste(VideoName, "_Shock.txt")), sep = "\t", header = T)
