@@ -22,7 +22,7 @@ exp_duration_sec = 1  # Duration of the shock (second)
 
 
 
-# This part used for analysis, do not write anything to below.
+# Following parts are used for analysis; do not write anything below.
 # Cut the video in the shock interval
 # This code uses moviepy to extract a subclip of the original video containing the shock interval.
 cutvideo_name = str((video_name.replace(".mp4", "")) + "_Cut.mp4")
