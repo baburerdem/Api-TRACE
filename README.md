@@ -64,11 +64,9 @@ Instructions:
 1. Prepare a metadata file in tab-delimited .txt format. The first column should be `BeeNo`. Numbers should be given according to {ExperimentVideoName}_BeeNo.jpg image. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName}_Metadata.txt
 
 2. Ensure that the necessary R libraries are installed:
-	- readxl
 	- ggplot2
 	- dplyr
 	- ggpubr
-	- writexl
 
 3. Update the following variables with appropriate values:
 	- `VideoName` : Name of the experiment video.
