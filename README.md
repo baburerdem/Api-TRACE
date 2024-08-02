@@ -2,8 +2,6 @@ A computer vision algorithm to analyze videos of electric shock avoidance assay 
 
 First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance Assay) to create shock event data and a tracking video from the experiment video, then run the R code (Learning Curve Plotter from Bee Tracker Output) to visualize the shock event data and create a tab delimited .txt file for further statistical analysis.
 
-** When naming videos, do not use spaces, mathematical symbols (+, -, /, *, %, etc.), or characters that do not exist in English.
-
 ---
 Title: Shocked Bee Detector for Electric Shock Avoidance Assay 
 - Date: 07/30/2023
@@ -43,7 +41,7 @@ Files:
 - {ExperimentVideoName}_BeeNo.jpg : Output .jpg image shows the numbers assigned to boxes.
 
 Notes: 
-- Ensure the experiment video is accessible and properly named.
+- Ensure the experiment video is accessible and properly named. Do not use spaces, mathematical symbols (+, -, /, *, %, etc.), or characters that do not exist in English.
 - The script utilizes various image processing techniques and interactive functionalities to facilitate analysis and tracking of bee movements.
 
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
