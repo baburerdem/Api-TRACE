@@ -241,7 +241,7 @@ while True:
             coord = (center_x, center_y)
             points.append(coord)
 
-    # Select the dots found in the boxes
+    # Select the center coordinates found in the boxes
     in_points = []
     n = 0
     while n < len(boxes):
@@ -256,7 +256,7 @@ while True:
                 inner_points.append(p1)
             m = m + 1
 
-        # Take the previous dot coordinate if no or more than one points were found in the shock box area
+        # Take the previous center coordinate if no or more than one center coordinate were found in the shock box area
         if len(inner_points) > 1:
             inner_points = [bees_coord[(bc - 1)][n]]
         elif len(inner_points) == 0:
@@ -268,7 +268,7 @@ while True:
 
     bees_coord.append(in_dots)
 
-    # If no dot found at the beginning of the tracking, use the next available coordinate.
+    # If no center coordinate is found at the beginning of the tracking, use the next available center coordinate.
     nopointlist = np.where((np.array(bees_coord[0])) == (-1, -1))[0]
     for k in nopointlist:
         if bees_coord[bc][k] != (-1, -1):
@@ -290,7 +290,7 @@ cv2.destroyAllWindows()
 
 # Analyze whether bees are shocked or not
 # This part of the code checks if each bee's tracked position falls within the shock area or not.
-# If the bee in the shock area, defined as TRUE.
+# If the bee is in the shock area, it is defined as TRUE.
 shocked_bees = []
 for bee in bees_coord:
     shocked_bee = []
