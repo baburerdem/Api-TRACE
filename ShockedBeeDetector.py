@@ -1,7 +1,7 @@
 # title: "Shocked Bee Detector for Electric Shock Avoidance Assay"
 # date: "07/30/2023"
 # author: "Babur Erdem"
-# update date: "02/22/2024"
+# update date: "08/06/2024"
 
 
 # Import necessary libraries
@@ -34,7 +34,6 @@ ffmpeg_extract_subclip(
 
 
 # Measure the size of a bee and estimate max and min of bee area.
-# This part of the code allows the user to draw the shock area on the frame.
 print("\n--- \nMeasure the length of a bee with left click \nIf you accept the measurement press (a) \nClick right to measure again \nPress (q) to quit\n")
 
 # Open the cut video and capture the first frame
@@ -78,8 +77,11 @@ measure_x = list(zip(*line_coordinates))[0]
 measure_y = list(zip(*line_coordinates))[1]
 
 bee_lenght = (abs(measure_x[0]-measure_x[1])**2 + abs(measure_y[0]-measure_y[1])**2)**(1/2)
+
+# We determined the width/length ratio of a bee is around 1/3. You can change the ratio according to your organism.
 bee_width = bee_lenght / 3   
-        
+
+# We assigned the extremum areas that a bee can cover. You can change them according to your organism.
 min_bee_size = 0.5 * bee_lenght * bee_width 
 max_bee_size = 4 * bee_lenght * bee_width 
 
