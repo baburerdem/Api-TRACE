@@ -51,9 +51,9 @@ def draw_line(event, x, y, flags, param):
     global frame, line_coordinates, new_measurement_line
     if event == cv2.EVENT_LBUTTONDOWN:
         line_coordinates.append((x, y))
-        cv2.circle(frame, (x, y), 3, (0, 0, 255), -1)
+        cv2.circle(frame, (x, y), 3, (0, 255, 0), -1)
         if len(line_coordinates) == 2:
-            cv2.polylines(frame, [np.array(line_coordinates)], True, (0, 0, 255), 2)
+            cv2.polylines(frame, [np.array(line_coordinates)], True, (0, 255, 0), 2)
                    
     elif event == cv2.EVENT_RBUTTONDOWN:                     
         line_coordinates = []  
