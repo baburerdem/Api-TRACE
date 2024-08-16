@@ -4,9 +4,9 @@ First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance As
 
 ---
 Title: Shocked Bee Detector for Electric Shock Avoidance Assay 
-- Date: 07/30/2023
 - Author: Babur Erdem
-- Update Date: 02/22/2024
+- Date: 07/30/2023
+- Update Date: 08/16/2024
 
 Description:
 This Python script is designed to detect and analyze the response of bees to a shock stimulus from the experiment video. 
@@ -51,7 +51,7 @@ For further inquiries or assistance, please contact Babur Erdem (author of the s
 Title: Learning Curve Plotter from Bee Tracker Output 
 - Author: Babur Erdem
 - Date: 2023-07-26
-- Update Date: 2024-02-27
+- Update Date: 2024-08-17
 
 Description:
 This R script is designed to analyze shock event data and visualization. 
