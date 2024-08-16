@@ -15,7 +15,7 @@ The code performs several tasks, including:
 - Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the shock area.
 - Tracking the movement of bees within defined boxes.
 - Analyzing whether bees are shocked or not based on their tracked positions.
-- Generating output files, including shock event data file and track video.
+- Generating output files, including the shock event data file and a track video.
 
 Instructions:
 1. Ensure that the necessary Python libraries are installed:
@@ -27,7 +27,7 @@ Instructions:
 
 3. Run the script in a Python environment.
 
-4. Update the following variables on prompt:
+4. Enter the following variables on the prompt:
 	- `Write the name of the experiment video:` : Name of the experiment video such as SampleVideo.mp4.
 	- `Shock begin time (hh:mm:ss):`: Time when the shock was applied in the experiment video.
 	- `Shock duration (hh:mm:ss):`: Duration of the shock.
