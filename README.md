@@ -75,7 +75,7 @@ Instructions:
 	- `fps` : fps of the experiment video.
 	- `SamplingRate` : Downsample the data. Data points in the plots are determined according to this variable.
 
-4. Run the R script.
+4. Run the R markdown (.Rmd) script.
 
 Files: 
 - {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
