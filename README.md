@@ -70,7 +70,7 @@ Instructions:
 	- ggpubr
 
 3. Update the following variables with appropriate values:
-	- `VideoName` : Name of the experiment video.
+	- `VideoName` : Name of the experiment video. Do not write the .mp4 extension.
 	- `IndVars` : Independant variables.
 	- `fps` : fps of the experiment video.
 	- `SamplingRate` : Downsample the data. Data points in the plots are determined according to this variable.
