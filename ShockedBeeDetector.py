@@ -14,8 +14,8 @@ import sys
 
 # Define variables for the experiment video and shock timings
 video_name = str(input("\nWrite the name of the experiment video: "))
-begin_time = input("Shock begin time (hh:mm:ss): ")
-exp_duration = input("Shock duration (hh:mm:ss): ")
+begin_time = input("\nShock begin time (hh:mm:ss): ")
+exp_duration = input("\nShock duration (hh:mm:ss): ")
 
 
 #Arrange the time inputs for using to cut video.
