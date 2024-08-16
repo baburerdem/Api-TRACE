@@ -17,7 +17,7 @@ library(ggpubr)
 ```{r}
 # Define variables for the experiment.
 
-VideoName = "SampleVideo"    # Write the name of Shocked Bee Detector output (shock event data)
+VideoName = "SampleVideo"    # Write the name of the experiment video
 IndVars = c("Treatment", "Dose")   # Define independent variable to be graphed
 fps= 30    #fps value of the experiment video
 SamplingRate = 60    #Downsampling rate (per sec)
