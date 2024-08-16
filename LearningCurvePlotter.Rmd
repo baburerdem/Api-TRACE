@@ -180,7 +180,8 @@ ggline(ShockedDf, x="Time", y = "ShockDuration", color = "IndVar",
                                                 sep = "")), xlab = "Second")+
 ggtitle(paste("Learning curves of", VideoName, sep=" "))+
   theme(
-    legend.position = "bottom",  
+    legend.position = "bottom", 
+    legend.title=element_blank(),
     plot.title = element_text(size=13), 
     axis.title.x = element_text(size=11),
     axis.title.y = element_text(size=11),
