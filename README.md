@@ -17,28 +17,29 @@ The code performs several tasks, including:
 - Analyzing whether bees are shocked or not based on their tracked positions.
 - Generating output files, including shock event data file and track video.
 
-
 Instructions:
 1. Ensure that the necessary Python libraries are installed:
 	- OpenCV (cv2)
 	- NumPy (np)
 	- Shapely
 	- MoviePy
-   
-2. Update the following variables with appropriate values:
-	- `video_name` : Name of the experiment video.
-	- `begin_min` and `begin_sec`: Time when the shock was applied in the experiment video.
-	- `exp_duration_min` and `exp_duration_sec`: Duration of the shock.
+	- ffmpeg
 
 3. Run the script in a Python environment.
 
-4. Follow the instructions prompted in the console window to measure a bee, draw box areas, and define the shock area on the video frames.
+4. Update the following variables on prompt:
+	- `Write the name of the experiment video:` : Name of the experiment video such as SampleVideo.mp4.
+	- `Shock begin time (hh:mm:ss):`: Time when the shock was applied in the experiment video.
+	- `Shock duration (hh:mm:ss):`: Duration of the shock.
+
+5. Follow the instructions prompted in the console window to measure a bee, draw box areas, and define the shock area on the video frames.
 
 Files: 
 - {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
 - {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
 - {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
 - {ExperimentVideoName}_BeeNo.jpg : Output .jpg image shows the numbers assigned to boxes.
+- {ExperimentVideoName}_ShockArea.jpg : Output .jpg image indicates shock side.
 
 Notes: 
 - Ensure the experiment video is accessible and properly named. Do not use spaces, mathematical symbols (+, -, /, *, %, etc.), or characters that do not exist in English.
