@@ -85,8 +85,8 @@ Files:
 
 Additionally, if you run the script with the .R extension, you can enter variables according to the prompts in the console. 
 In this case, pay attention to these:
-- 'Write the name of the experiment video:' Do not write the .mp4 extension when you enter the response. 
-- 'Define the independent variables:' Separate independent variables with commas only, no spaces. 
+- `Write the name of the experiment video:` Do not write the .mp4 extension when you enter the response. 
+- `Define the independent variables:` Separate independent variables with commas only, no spaces. 
 
 Note: 
 - Make sure to replace {FileName} with the actual name of your data file.
