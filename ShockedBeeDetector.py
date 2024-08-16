@@ -1,7 +1,7 @@
 # title: "Shocked Bee Detector for Electric Shock Avoidance Assay"
 # date: "07/30/2023"
 # author: "Babur Erdem"
-# update date: "08/06/2024"
+# update date: "08/16/2024"
 
 
 # Import necessary libraries
@@ -11,15 +11,23 @@ from shapely.geometry import Point, Polygon
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import sys
 
+
 # Define variables for the experiment video and shock timings
-video_name = "SampleVideo.mp4"  # Write the name of the experiment video
-begin_min = 0   # Shock was applied at that time in experiment video (minute)
-begin_sec = 20  # Shock was applied at that time in experiment video (second)
-
-exp_duration_min = 5  # Duration of the shock (minute)
-exp_duration_sec = 1  # Duration of the shock (second)
+video_name = str(input("\nWrite the name of the experiment video: "))
+begin_time = input("Shock begin time (hh:mm:ss): ")
+exp_duration = input("Shock duration (hh:mm:ss): ")
 
 
+#Arrange the time inputs for using to cut video.
+begin_list =  begin_time.split(":")
+begin_hour = int(begin_list[0])
+begin_min = int(begin_list[1])
+begin_sec = int(begin_list[2])
+
+exp_duration_list = exp_duration.split(":")
+exp_duration_hour = int(exp_duration_list[0])
+exp_duration_min = int(exp_duration_list[1])
+exp_duration_sec = int(exp_duration_list[2])
 
 
 # Following parts are used for analysis; do not write anything below.
@@ -176,7 +184,15 @@ def draw_area(event, x, y, flags, param):
         cv2.circle(frame, (x, y), 3, (0, 255, 0), -1)
         if len(area_coordinates) == 4:
             cv2.polylines(frame, [np.array(area_coordinates)], True, (0, 255, 0), 2)
-     
+            
+            # Calculate the center of the shock area
+            center_x = int(sum(point[0] for point in area_coordinates) / 4)
+            center_y = int(sum(point[1] for point in area_coordinates) / 4)
+
+            # Indicate the shock area on frame
+            cv2.putText(frame, "Shock Area", (center_x, center_y),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
+                 
     elif event == cv2.EVENT_RBUTTONDOWN:                     
         area_coordinates = []  
         frame = new_shock_area 
@@ -194,6 +210,8 @@ while True:
         video.release()
         cv2.destroyAllWindows()
         sys.exit()
+
+cv2.imwrite(str((video_name.replace(".mp4", "")) + "_ShockArea.jpg"), frame)
 
 video.release()
 cv2.destroyAllWindows()
