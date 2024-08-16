@@ -83,7 +83,13 @@ Files:
 - {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
 - {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
+Additionally, if you run the script with the .R extension, you can enter variables according to the prompts in the console. 
+In this case, pay attention to these:
+- 'Write the name of the experiment video:' Do not write the .mp4 extension when you enter the response. 
+- 'Define the independent variables:' Separate independent variables with commas only, no spaces. 
+
 Note: 
 - Make sure to replace {FileName} with the actual name of your data file.
+- Make sure that the independent variables you enter are consistent with the column names in the metadata file.
 
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
