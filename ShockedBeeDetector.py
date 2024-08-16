@@ -18,7 +18,7 @@ begin_time = input("\nShock begin time (hh:mm:ss): ")
 exp_duration = input("\nShock duration (hh:mm:ss): ")
 
 
-#Arrange the time inputs for using to cut video.
+#Arrange the time inputs for cutting the video.
 begin_list =  begin_time.split(":")
 begin_hour = int(begin_list[0])
 begin_min = int(begin_list[1])
