@@ -1,7 +1,7 @@
 # title: "Shocked Bee Detector for Electric Shock Avoidance Assay"
 # date: "07/30/2023"
 # author: "Babur Erdem"
-# update date: "08/16/2024"
+# update date: "08/31/2024"
 
 
 # Import necessary libraries
@@ -332,6 +332,8 @@ with open(shock_file_name, "w") as shock_file:
         shock_file.write("\t".join(shbees) + "\n")
 
 # Create a track video showing the tracked positions of the bees
+print("\n--- \nWait until the dot video is generated \n...\n")
+
 cap = cv2.VideoCapture(cutvideo_name)
 fourcc = cv2.VideoWriter_fourcc(*"mp4v")
 out = cv2.VideoWriter(str((video_name.replace(".mp4", "")) + "_DotVideo.mp4"), fourcc, fps, (width, height))
@@ -351,3 +353,5 @@ for frame_index in range(len(bees_coord)):
 cap.release()
 out.release()
 cv2.destroyAllWindows()
+
+print("\n--- \nThe process is complete.")
