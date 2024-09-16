@@ -1,21 +1,21 @@
-A computer vision algorithm to analyze videos of electric shock avoidance assay on honey bees and a data processing code to visualize the results.
+Api-TRACE, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to an aversive stimulus. The algorithm provides stimulus exposure duration and learning profiles of each individual bee, enabling fast and detailed analysis of the results.
 
-First, run the Python code (Shocked Bee Detector for Electric Shock Avoidance Assay) to create shock event data and a tracking video from the experiment video, then run the R code (Learning Curve Plotter from Bee Tracker Output) to visualize the shock event data and create a tab delimited .txt file for further statistical analysis.
+First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create shock event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the shock event data and create a tab delimited .txt file for further statistical analysis.
 
 ---
-Title: Shocked Bee Detector for Electric Shock Avoidance Assay 
+Title: Api-TRACE Video Processing Module
 - Author: Babur Erdem
 - Date: 07/30/2023
 - Update Date: 08/16/2024
 
 Description:
-This Python script is designed to detect and analyze the response of bees to a shock stimulus from the experiment video. 
+This Python script is designed to detect and analyze the response of bees to an aversive stimulus from the experiment video. 
 The code performs several tasks, including:	 
 - Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
-- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the shock area.
+- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the area of the aversive stimulus.
 - Tracking the movement of bees within defined boxes.
-- Analyzing whether bees are shocked or not based on their tracked positions.
-- Generating output files, including the shock event data file and a track video.
+- Analyzing whether bees are exposed to the aversive stimulus or not based on their tracked positions.
+- Generating output files, including the exposition event data file and a track video.
 
 Instructions:
 1. Ensure that the necessary Python libraries are installed:
@@ -32,14 +32,14 @@ Instructions:
 	- `Shock begin time (hh:mm:ss):`: Time when the shock was applied in the experiment video.
 	- `Shock duration (hh:mm:ss):`: Duration of the shock.
 
-5. Follow the instructions prompted in the console window to measure a bee, draw box areas, and define the shock area on the video frames.
+5. Follow the instructions prompted in the console window to measure a bee, draw box areas, and define the exposition area on the video frames.
 
 Files: 
 - {ExperimentVideoName}.mp4 : Experiment video, which is the input for the code.
-- {ExperimentVideoName}_Shock.txt : Output .txt file includes shock event data, the input of Learning Curve Plotter (R code).
+- {ExperimentVideoName}_Shock.txt : Output .txt file includes exposition event data, the input of DAVM (R code).
 - {ExperimentVideoName}_DotVideo.mp4 : Output .mp4 video is showing the tracked positions of the bees.
 - {ExperimentVideoName}_BeeNo.jpg : Output .jpg image shows the numbers assigned to boxes.
-- {ExperimentVideoName}_ShockArea.jpg : Output .jpg image indicates shock side.
+- {ExperimentVideoName}_ShockArea.jpg : Output .jpg image indicates exposition side.
 
 Notes: 
 - Ensure the experiment video is accessible and properly named. Do not use spaces, mathematical symbols (+, -, /, *, %, etc.), or characters that do not exist in English.
@@ -48,7 +48,7 @@ Notes:
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
 
 ---
-Title: Learning Curve Plotter from Bee Tracker Output 
+Title: Api-TRACE Data Analysis and Visualization Module
 - Author: Babur Erdem
 - Date: 2023-07-26
 - Update Date: 2024-08-17
@@ -56,9 +56,9 @@ Title: Learning Curve Plotter from Bee Tracker Output
 Description:
 This R script is designed to analyze shock event data and visualization. 
 The code performs several tasks, including:
-- Data preprocessing, converting shock event data, came from Shocked Bee Detector (Python code), to binary data.
+- Data preprocessing, converting exposition event data, came from VPM (Python code), to binary data.
 - Creating a structured data frame.
-- Generating an Excel file for further statistical analysis.
+- Generating a tab-delimited text file for further statistical analysis.
 - Drawing two plots: individuals' and group learning curves.
 
 Instructions:
@@ -78,8 +78,8 @@ Instructions:
 4. Run the R markdown (.Rmd) script.
 
 Files: 
-- {ExperimentVideoName}_Shock.txt : Input data, which is created by Shocked Bee Detector (Python code), indicating whether bees are shocked or not.
-- {ExperimentVideoName}_Data.txt : The output .txt file containing shock duration for each bee.
+- {ExperimentVideoName}_Shock.txt : Input data, which is created by VPM (Python code), indicating whether animals are exposed to the aversive stimulus or not.
+- {ExperimentVideoName}_Data.txt : The output .txt file containing exposure duration for each bee.
 - {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
 - {ExperimentVideoName}_ShockPlot.jpg : Group learning curve plot.
 
