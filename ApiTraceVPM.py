@@ -1,4 +1,4 @@
-# title: "Shocked Bee Detector for Electric Shock Avoidance Assay"
+# title: "Video Processing Module of Api-TRACE"
 # date: "07/30/2023"
 # author: "Babur Erdem"
 # update date: "08/31/2024"
