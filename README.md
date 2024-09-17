@@ -1,4 +1,4 @@
-Api-TRACE: Honey Bee Tracking in Constrained Environments, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to a stimulus. The algorithm provides stimulus exposure duration and learning profiles of each individual bee, enabling fast and detailed analysis of the results.
+Api-TRACE: Honey Bee Tracking in Constrained Environments, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to the stimulus. The algorithm provides stimulus exposure duration and profiles of each individual bee, enabling fast and detailed analysis of the results.
 
 First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create exposure event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the exposure event data and create a tab-delimited .txt file for further statistical analysis.
 
@@ -58,7 +58,7 @@ The code performs several tasks, including:
 - Data preprocessing, converting exposure event data, came from VPM (Python code), to binary data.
 - Creating a structured data frame.
 - Generating a tab-delimited text file for further statistical analysis.
-- Drawing two plots: individuals' and group learning curves.
+- Drawing two plots: individuals' and group exposure curves.
 
 Instructions:
 1. Prepare a metadata file in tab-delimited .txt format. The first column should be `BeeNo`. Numbers should be given according to {ExperimentVideoName}_BeeNo.jpg image. Then, enter the attributes of the experiment and bees, such as `Treatment`, `Dose`, `Unit`, `Replicate`, `Phase`, `Subspecies`. Named the file as {ExperimentVideoName}_Metadata.txt
@@ -79,8 +79,8 @@ Instructions:
 Files: 
 - {ExperimentVideoName}_Exposure.txt : Input data, which is created by VPM (Python code), indicating whether animals are exposed to the stimulus or not.
 - {ExperimentVideoName}_Data.txt : The output .txt file containing exposure duration for each bee.
-- {ExperimentVideoName}_IndividualsProfiles.jpg : Learning curves of each individual.
-- {ExperimentVideoName}_ExposurePlot.jpg : Group learning curve plot.
+- {ExperimentVideoName}_IndividualsProfiles.jpg : Exposure curves of each individual.
+- {ExperimentVideoName}_ExposurePlot.jpg : Group exposure curve plot.
 
 Additionally, if you run the script with the .R extension, you can enter variables according to the prompts in the console. 
 In this case, pay attention to these:
