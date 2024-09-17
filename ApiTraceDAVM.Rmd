@@ -20,7 +20,7 @@ library(ggpubr)
 VideoName = "SampleVideo"    # Write the name of the experiment video
 IndVars = c("Treatment", "Dose")   # Define independent variable to be graphed
 fps= 30    #fps value of the experiment video
-SamplingRate = 60    #Downsampling rate (per sec)
+SamplingRate = 15    #Downsampling rate (per sec)
 ```
 
 
@@ -124,7 +124,7 @@ for (ind in c(1:ncol(ShockDf))){
   }
 shockDuration = c(shockDuration, shockDur)  
 }
-ShockedDf$ShockDuration <- shockDuration/fps
+ShockedDf$ExposureDuration <- shockDuration/fps
 ```
 
 
@@ -143,11 +143,11 @@ write.table(ShockedDf, paste((gsub("_Exposure.txt", "" ,VideoName)), "_Data.txt"
 
 
 ```{r}
-# Generate and save a line plot, represents for each individual's learning curve.
+# Generate and save a line plot, represents for each individual's exposure curve.
 
-ggplot(data=ShockedDf, aes(x=Time, y=ShockDuration, col$BeeID)) + 
+ggplot(data=ShockedDf, aes(x=Time, y=ExposureDuration, col$BeeID)) + 
  geom_line(alpha=0.5,lwd=1) + 
-ggtitle(paste("Learning profiles of", gsub('_Exposure.txt','',VideoName), sep=" "))+
+ggtitle(paste("Exposure profiles of", gsub('_Exposure.txt','',VideoName), sep=" "))+
  theme(
 legend.background = element_rect(colour = NA),  
 legend.box = NULL,
@@ -173,12 +173,12 @@ ggsave(paste(gsub("_Exposure.txt", "" ,VideoName), "_IndividualsProfiles.jpg", s
 
 
 ```{r}
-# Generate and save a line plot, represents group learning curve.
+# Generate and save a line plot, represents group exposure curve.
 
-ggline(ShockedDf, x="Time", y = "ShockDuration", color = "IndVar",
+ggline(ShockedDf, x="Time", y = "ExposureDuration", color = "IndVar",
        add = c("mean_se"),size=1, ylab = (paste("Exposure Duration in ", SamplingRate, " sec", 
                                                 sep = "")), xlab = "Second")+
-ggtitle(paste("Learning curves of", VideoName, sep=" "))+
+ggtitle(paste("Exposure curves of", VideoName, sep=" "))+
   theme(
     legend.position = "bottom", 
     legend.title=element_blank(),
@@ -192,4 +192,3 @@ ggtitle(paste("Learning curves of", VideoName, sep=" "))+
 
 ggsave(paste(gsub("_Exposure.txt", "" ,VideoName), "_ExposurePlot.jpg", sep = ""))
 ```
-
