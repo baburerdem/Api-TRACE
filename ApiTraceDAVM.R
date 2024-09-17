@@ -1,14 +1,18 @@
-# title: "Data Analysis and Visualization Module of Api-TRACE"
-# author: "Babur Erdem"
-# date: "2023-07-26"
-# update date: "2024-08-17"
-###
- 
+---
+title: "Data Analysis and Visualization Module of Api-TRACE"
+author: "Babur Erdem"
+date: "2023-07-26"
+update date: "2024-08-17"
+---
+  
+   
 # Load necessary libraries.
 
 library(ggplot2)
 library(dplyr)
 library(ggpubr)
+ 
+
 
 getwd()
 
@@ -26,6 +30,8 @@ fps <- as.numeric(fps)
 SamplingRate <- readline(as.character("Define the desired downsampling rate (per sec): "))
 SamplingRate <- as.numeric(SamplingRate)
 
+
+ 
 # Following parts are used for analysis; do not change anything below.
 # Read exposure event data, converting boolean values to binary.
 
@@ -33,11 +39,17 @@ ShockDf <- read.csv(gsub(" ", "", paste(VideoName, "_Exposure.txt")), sep = "\t"
 ShockDf[ShockDf == "True"] <- 1
 ShockDf[ShockDf == "False"] <- 0
 ShockDf <- data.frame(sapply(ShockDf, function(x) as.numeric(as.character(x))))
+ 
 
+
+ 
 #Read metadata
 
 MetaDf <- read.csv(gsub(" ", "", paste(VideoName, "_Metadata.txt")), sep = "\t", header = T)
+ 
 
+
+ 
 # Create a dataframe to store processed exposure event data.
 
 columns = c("Video", colnames(MetaDf), "IndVar", "BeeID",
@@ -47,7 +59,10 @@ ShockedDf = data.frame(matrix
                        (nrow =(ceiling(nrow(ShockDf)/(fps*SamplingRate)))*(ncol(ShockDf)), 
                          ncol = length(columns)))
 colnames(ShockedDf) <- columns
+ 
 
+
+ 
 # Construct structured dataframe.
 # Populate the metadata columns in the dataframe.
 
@@ -73,11 +88,17 @@ for (inVar in IndVars) {
   mergeInVars <- paste(mergeInVars, indepVar, sep = "_")
 } 
 ShockedDf$IndVar <- gsub("^.", "",mergeInVars)
+ 
 
+
+ 
 # Generate Bee IDs based on the structure of the data.
 
 ShockedDf$BeeID <- gsub(" ", "", (paste( VideoName, "_", "Bee", sprintf("%02d",ShockedDf$BeeNo))))
+ 
 
+
+ 
 # Define time points for exposure duration calculation.
 
 times <- c()
@@ -91,7 +112,10 @@ while (j <= ((ceiling((nrow(ShockDf))/(fps)))-1)) {
 }
 
 ShockedDf$Time <- rep(times, ncol(ShockDf))
+ 
 
+
+ 
 # Calculate exposure duration for each time interval.
 
 shockDuration = c()
@@ -107,21 +131,30 @@ for (ind in c(1:ncol(ShockDf))){
   }
   shockDuration = c(shockDuration, shockDur)  
 }
-ShockedDf$ShockDuration <- shockDuration/fps
+ShockedDf$ExposureDuration <- shockDuration/fps
+ 
 
+
+ 
 # Remove rows with NA values.
 
 ShockedDf <- na.omit(ShockedDf)
+ 
 
-# Write shock duration for each bee to a txt file.
+
+ 
+# Write exposure duration for each bee to a txt file.
 
 write.table(ShockedDf, paste((gsub("_Exposure.txt", "" ,VideoName)), "_Data.txt", sep = ""), sep = "\t", quote=FALSE)
+ 
 
-# Generate and save a line plot, represents for each individual's learning curve.
 
-ggplot(data=ShockedDf, aes(x=Time, y=ShockDuration, col$BeeID)) + 
+ 
+# Generate and save a line plot, represents for each individual's exposure curve.
+
+ggplot(data=ShockedDf, aes(x=Time, y=ExposureDuration, col$BeeID)) + 
   geom_line(alpha=0.5,lwd=1) + 
-  ggtitle(paste("Learning profiles of", gsub('_Exposure.txt','',VideoName), sep=" "))+
+  ggtitle(paste("Exposure profiles of", gsub('_Exposure.txt','',VideoName), sep=" "))+
   theme(
     legend.background = element_rect(colour = NA),  
     legend.box = NULL,
@@ -143,15 +176,18 @@ ggplot(data=ShockedDf, aes(x=Time, y=ShockDuration, col$BeeID)) +
   facet_wrap(~BeeID)
 
 ggsave(paste(gsub("_Exposure.txt", "" ,VideoName), "_IndividualsProfiles.jpg", sep = ""))
+ 
 
-# Generate and save a line plot, represents group learning curve.
 
-ggline(ShockedDf, x="Time", y = "ShockDuration", color = "IndVar",
+ 
+# Generate and save a line plot, represents group exposure curve.
+
+ggline(ShockedDf, x="Time", y = "ExposureDuration", color = "IndVar",
        add = c("mean_se"),size=1, ylab = (paste("Exposure Duration in ", SamplingRate, " sec", 
-                                                sep = "")), xlab = "Seconds")+
-  ggtitle(paste("Learning curves of", VideoName, sep=" "))+
+                                                sep = "")), xlab = "Second")+
+  ggtitle(paste("Exposure curves of", VideoName, sep=" "))+
   theme(
-    legend.position = "bottom",  
+    legend.position = "bottom", 
     legend.title=element_blank(),
     plot.title = element_text(size=13), 
     axis.title.x = element_text(size=11),
@@ -162,3 +198,4 @@ ggline(ShockedDf, x="Time", y = "ShockDuration", color = "IndVar",
   ) 
 
 ggsave(paste(gsub("_Exposure.txt", "" ,VideoName), "_ExposurePlot.jpg", sep = ""))
+ 
