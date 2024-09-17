@@ -1,6 +1,6 @@
-Api-TRACE, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to an aversive stimulus. The algorithm provides stimulus exposure duration and learning profiles of each individual bee, enabling fast and detailed analysis of the results.
+Api-TRACE, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to a stimulus. The algorithm provides stimulus exposure duration and learning profiles of each individual bee, enabling fast and detailed analysis of the results.
 
-First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create shock event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the shock event data and create a tab-delimited .txt file for further statistical analysis.
+First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create exposure event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the exposure event data and create a tab-delimited .txt file for further statistical analysis.
 
 ---
 Title: Api-TRACE Video Processing Module
@@ -9,12 +9,12 @@ Title: Api-TRACE Video Processing Module
 - Update Date: 08/16/2024
 
 Description:
-This Python script is designed to detect and analyze the response of bees to an aversive stimulus from the experiment video. 
+This Python script is designed to detect and analyze the response of bees to a stimulus from the experiment video. 
 The code performs several tasks, including:	 
-- Extracting a subclip from the experiment video is spanned from the experiment beginning time to a defined experiment duration. 
-- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the area of the aversive stimulus.
+- Extracting a subclip from the experiment video is spanned from the trial beginning time to a defined trial duration. 
+- Measuring the size of a bee, defining ROIs by drawing shuttle box areas and the area of the exposure.
 - Tracking the movement of bees within defined boxes.
-- Analyzing whether bees are exposed to the aversive stimulus or not based on their tracked positions.
+- Analyzing whether bees are exposed to the stimulus or not based on their tracked positions.
 - Generating output files, including the exposure event data file and a track video.
 
 Instructions:
@@ -26,7 +26,7 @@ Instructions:
 	- ffmpeg
 
 3. Run the script in a Python environment.
-
+----------
 4. Enter the following variables on the prompt:
 	- `Write the name of the experiment video:` : Name of the experiment video such as SampleVideo.mp4.
 	- `Shock begin time (hh:mm:ss):`: Time when the shock was applied in the experiment video.
