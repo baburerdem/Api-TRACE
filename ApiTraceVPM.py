@@ -12,10 +12,10 @@ from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
 import sys
 
 
-# Define variables for the experiment video and shock timings
+# Define variables for the experiment video and trial timings
 video_name = str(input("\nWrite the name of the experiment video: "))
-begin_time = input("\nShock begin time (hh:mm:ss): ")
-exp_duration = input("\nShock duration (hh:mm:ss): ")
+begin_time = input("\nTrial begin time (hh:mm:ss): ")
+exp_duration = input("\nTrial duration (hh:mm:ss): ")
 
 
 #Arrange the time inputs for cutting the video.
@@ -31,8 +31,8 @@ exp_duration_sec = int(exp_duration_list[2])
 
 
 # Following parts are used for analysis; do not write anything below.
-# Cut the video in the shock interval
-# This code uses moviepy to extract a subclip of the original video containing the shock interval.
+# Cut the video in the exposure interval
+# This code uses moviepy to extract a subclip of the original video containing the trial interval.
 cutvideo_name = str((video_name.replace(".mp4", "")) + "_Cut.mp4")
 ffmpeg_extract_subclip(
     video_name,
@@ -97,7 +97,7 @@ video.release()
 cv2.destroyAllWindows()
 
 
-# Drawing the shock boxes. Bees take the IDs according to the drawing order of the boxes.
+# Drawing the shuttle boxes. Bees take the IDs according to the drawing order of the boxes.
 # The coordinates of these boxes are stored for later tracking.
 print("\n--- \nDraw shuttle box areas with left click \nIf you have completed drawing the boxes, press (a) \nClick right to redraw the last box \nPress (q) to quit\n")
 
@@ -162,9 +162,9 @@ cv2.imwrite(str((video_name.replace(".mp4", "")) + "_BeeNo.jpg"), frame)
 video.release()
 cv2.destroyAllWindows()
 
-# Drawing the shock area.
-# This part of the code allows the user to draw the shock area on the frame.
-print("\n--- \nDraw shock area with left click \nIf you have completed drawing the shock area, press (a) \nClick right to redraw the shock area \nPress (q) to quit\n")
+# Drawing the exposure area.
+# This part of the code allows the user to draw the exposure area on the frame.
+print("\n--- \nDraw exposure area with left click \nIf you have completed drawing the exposure area, press (a) \nClick right to redraw the exposure area \nPress (q) to quit\n")
 
 # Open the cut video and capture the first frame
 video = cv2.VideoCapture(cutvideo_name)
@@ -173,10 +173,10 @@ ret, frame = video.read()
 area_coordinates = []
 new_shock_area = frame.copy()
 
-cv2.namedWindow("Draw shock area", cv2.WINDOW_NORMAL)
-cv2.imshow("Draw shock area", frame)
+cv2.namedWindow("Draw exposure area", cv2.WINDOW_NORMAL)
+cv2.imshow("Draw exposure area", frame)
 
-# Mouse callback function to draw the shock area on the frame
+# Mouse callback function to draw the exposure area on the frame
 def draw_area(event, x, y, flags, param):
     global frame, area_coordinates, new_shock_area
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -185,21 +185,21 @@ def draw_area(event, x, y, flags, param):
         if len(area_coordinates) == 4:
             cv2.polylines(frame, [np.array(area_coordinates)], True, (0, 255, 0), 2)
             
-            # Calculate the center of the shock area
+            # Calculate the center of the exposure area
             center_x = int(sum(point[0] for point in area_coordinates) / 4)
             center_y = int(sum(point[1] for point in area_coordinates) / 4)
 
-            # Indicate the shock area on frame
-            cv2.putText(frame, "Shock Area", (center_x, center_y),
+            # Indicate the exposure area on frame
+            cv2.putText(frame, "Exposure Area", (center_x, center_y),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                  
     elif event == cv2.EVENT_RBUTTONDOWN:                     
         area_coordinates = []  
         frame = new_shock_area 
          
-    cv2.imshow("Draw shock area", frame)
+    cv2.imshow("Draw exposure area", frame)
 
-cv2.setMouseCallback("Draw shock area", draw_area)
+cv2.setMouseCallback("Draw exposure area", draw_area)
 
 # Wait for the user to press 'a' to continue or 'q' to exit
 while True:
@@ -211,7 +211,7 @@ while True:
         cv2.destroyAllWindows()
         sys.exit()
 
-cv2.imwrite(str((video_name.replace(".mp4", "")) + "_ShockArea.jpg"), frame)
+cv2.imwrite(str((video_name.replace(".mp4", "")) + "_ExposureArea.jpg"), frame)
 
 video.release()
 cv2.destroyAllWindows()
@@ -274,7 +274,7 @@ while True:
                 inner_points.append(p1)
             m = m + 1
 
-        # Take the previous center coordinate if no or more than one center coordinate were found in the shock box area
+        # Take the previous center coordinate if no or more than one center coordinate were found in the shuttle box area
         if len(inner_points) > 1:
             inner_points = [bees_coord[(bc - 1)][n]]
         elif len(inner_points) == 0:
@@ -306,9 +306,9 @@ while True:
 video.release()
 cv2.destroyAllWindows()
 
-# Analyze whether bees are shocked or not
-# This part of the code checks if each bee's tracked position falls within the shock area or not.
-# If the bee is in the shock area, it is defined as TRUE.
+# Analyze whether bees are exposed or not
+# This part of the code checks if each bee's tracked position falls within the exposure area or not.
+# If the bee is in the exposure area, it is defined as TRUE.
 shocked_bees = []
 for bee in bees_coord:
     shocked_bee = []
@@ -316,14 +316,14 @@ for bee in bees_coord:
         shocked_bee.append((Point(shock_bee)).within(Polygon(area_coordinates)))
     shocked_bees.append(shocked_bee)
 
-# Create a shock indicator file to save the results of the shock analysis.
+# Create an exposure indicator file to save the results of the exposure analysis.
 title_row = []
 n = 1
 while n <= len(shocked_bee):
     Xn = str("Bee" + str(n))
     title_row.append(Xn)
     n = n + 1
-shock_file_name = str((video_name.replace(".mp4", "")) + "_Shock.txt")
+shock_file_name = str((video_name.replace(".mp4", "")) + "_Exposure.txt")
 with open(shock_file_name, "w") as shock_file:
     shock_file.write("\t".join(title_row) + "\n")
     for sbees in shocked_bees:
