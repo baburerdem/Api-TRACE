@@ -1,6 +1,8 @@
-Api-TRACE: Honey Bee Tracking in Constrained Environments, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to the stimulus. The algorithm provides stimulus exposure duration and profiles of each individual bee, enabling fast and detailed analysis of the results. When you use the codes found here, please reference the relevant article. DOI: 
+Api-TRACE: Honey Bee Tracking in Constrained Environments, a computer vision-aided system to analyze the avoidance assays. Api-TRACE tracks individual bees from the video footage of the assay and detects the moments when they were exposed to the stimulus. The algorithm provides stimulus exposure duration and profiles of each individual bee, enabling fast and detailed analysis of the results. When you use the codes found here, please reference the relevant article.
 
 First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create exposure event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the exposure event data and create a tab-delimited .txt file for further statistical analysis.
+
+When you use the codes found here, please reference the relevant article: Erdem, B., Ince, A., Sevin, S., Arslan, O.C., Gozen, A. G.,  Tugrul, G., & Alemdar, H. (2024). Api-TRACE: A System for honey bee tracking in a constrained environment to study bee learning process and the effect of lithium on learning. bioRxiv. https://doi.org/10.1101/2024.09.24.614513
 
 ---
 Title: Api-TRACE Video Processing Module
