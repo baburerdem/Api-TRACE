@@ -2,7 +2,8 @@ Api-TRACE: Honey Bee Tracking in Constrained Environments, a computer vision-aid
 
 First, run the Api-TRACE Video Processing Module (VPM), the Python code, to create exposure event data and a tracking video from the experiment video, then run the Api-TRACE Data Analysis and Visualization Module (DAVM), the R code, to visualize the exposure event data and create a tab-delimited .txt file for further statistical analysis.
 
-When you use the codes found here, please reference the relevant article: 
+When you use the codes found here, please reference the relevant article:
+
 Erdem, B., Ince, A., Sevin, S., Arslan, O. C., Gozen, A. G., Giray, T., & Alemdar, H. (2026). Api-TRACE: A system for honey bee tracking in a constrained environment to study bee learning process and the effect of lithium on learning. Computers and Electronics in Agriculture, 241, 111236. https://doi.org/10.1016/j.compag.2025.111236
 
 ---
@@ -97,12 +98,8 @@ Note:
 For further inquiries or assistance, please contact Babur Erdem (author of the script) at ebabur@metu.edu.tr.
 
 Would you like to gift a cup of coffee or support?
-Recipient Name and Surname: Babur Erdem
-
-Bank name | Branch | City | Country: Ziraat Bank | ODTÜ Şubesi | Ankara | Türkiye
-
-For USD transfer: CHIPS code: 409993 | IBAN: TR93 0001 0015 3750 7777 0750 09
-
-For Euro transfer: SWIFT code: TCZBTR2A | IBAN: TR66 0001 0015 3750 7777 0750 10
-
-For TL transfer: IBAN: TR07 0001 0015 3750 7777 0750 05
+- Recipient Name and Surname: Babur Erdem
+- Bank name, Branch, City, Country: Ziraat Bank, ODTÜ Şubesi, Ankara, Türkiye
+- For USD transfer: CHIPS code: 409993 | IBAN: TR93 0001 0015 3750 7777 0750 09
+- For Euro transfer: SWIFT code: TCZBTR2A | IBAN: TR66 0001 0015 3750 7777 0750 10
+- For TL transfer: IBAN: TR07 0001 0015 3750 7777 0750 05
