@@ -98,7 +98,11 @@ For further inquiries or assistance, please contact Babur Erdem (author of the s
 
 Would you like to gift a cup of coffee or support?
 Recipient Name and Surname: Babur Erdem
+
 Bank name | Branch | City | Country: Ziraat Bank | ODTÜ Şubesi | Ankara | Türkiye
+
 For USD transfer: CHIPS code: 409993 | IBAN: TR93 0001 0015 3750 7777 0750 09
+
 For Euro transfer: SWIFT code: TCZBTR2A | IBAN: TR66 0001 0015 3750 7777 0750 10
+
 For TL transfer: IBAN: TR07 0001 0015 3750 7777 0750 05
